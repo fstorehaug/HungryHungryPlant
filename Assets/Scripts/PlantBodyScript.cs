@@ -8,11 +8,14 @@ public class PlantBodyScript : MonoBehaviour
     private PlantHeadScript plantHeadScript;
     [SerializeField]
     private PlantBodyPiceScript plantBodyPicePrefab;
+    [SerializeField]
+    private CameraControllScript camera;
 
     Stack<PlantBodyPiceScript> plantBodyPicePool = new Stack<PlantBodyPiceScript>();
     List<PlantBodyPiceScript> activePlantPices = new List<PlantBodyPiceScript>();
 
     PlantBodyPiceScript piceToAdd;
+    int numberOfPices = 0;
 
     private void Start()
     {
@@ -34,7 +37,11 @@ public class PlantBodyScript : MonoBehaviour
         } else
         {
             piceToAdd = Instantiate(plantBodyPicePrefab);
+            numberOfPices++;
+            piceToAdd.gameObject.name = "PiceNumber: " + numberOfPices.ToString();
         }
+        piceToAdd.SetUpPice(camera, plantHeadScript, OnPiceDestroyedCallback);
+
         piceToAdd.transform.position = oldPosition;
         activePlantPices.Add(piceToAdd);
     }
@@ -42,8 +49,8 @@ public class PlantBodyScript : MonoBehaviour
     public void OnPiceDestroyedCallback(PlantBodyPiceScript destroyedPice)
     {
         activePlantPices.Remove(destroyedPice);
-        destroyedPice.gameObject.SetActive(false);
         plantBodyPicePool.Push(destroyedPice);
+        destroyedPice.gameObject.SetActive(false);
     }
 
     private bool IsGameOver()

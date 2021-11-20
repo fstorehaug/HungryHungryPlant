@@ -270,7 +270,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -359,6 +359,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   plantHeadScript: {fileID: 1681637025}
   plantBodyPicePrefab: {fileID: 5398852423776451148, guid: 7e40fc815f925bb4b8d17dacb5217e18, type: 3}
+  camera: {fileID: 963194229}
 --- !u!114 &1681637025 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7516665957755359737, guid: 42250c47e426c2f4081cbc38c4794503, type: 3}
