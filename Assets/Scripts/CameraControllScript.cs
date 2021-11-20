@@ -19,7 +19,7 @@ public class CameraControllScript : MonoBehaviour
 
     private float cameraMoveRate = .2f;
 
-    private float deathDistance { get { return camera.orthographicSize; } }
+    private float deathDistance { get { return camera.orthographicSize + 0.5f; } }
 
 
     private void Start()
