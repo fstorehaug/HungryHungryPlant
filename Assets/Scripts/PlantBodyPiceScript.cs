@@ -10,10 +10,13 @@ public class PlantBodyPiceScript : MonoBehaviour
     private PlantHeadScript headScript;
     public delegate void OnOutOfBoundsDelegate(PlantBodyPiceScript pice);
     public event OnOutOfBoundsDelegate onOutOfBounds;
+    [SerializeField]
+    private SpriteSelector spriteSelector;
 
 
-    public void SetUpPice(CameraControllScript camera, PlantHeadScript headScript, OnOutOfBoundsDelegate callback)
+    public void SetUpPice(CameraControllScript camera, PlantHeadScript headScript, OnOutOfBoundsDelegate callback, Vector3 direction, Vector3 oldDirection)
     {
+        spriteSelector.selectSPrite(direction, oldDirection);
         this.camera = camera;
         this.headScript = headScript; 
         onOutOfBounds += callback;

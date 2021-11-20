@@ -17,6 +17,8 @@ public class PlantBodyScript : MonoBehaviour
     PlantBodyPiceScript piceToAdd;
     int numberOfPices = 0;
 
+    private Vector3 oldDirection = Vector3.up;
+
     private void Start()
     {
         plantHeadScript.OnPositionChanged += OnHeadPositionChanged;
@@ -40,8 +42,9 @@ public class PlantBodyScript : MonoBehaviour
             numberOfPices++;
             piceToAdd.gameObject.name = "PiceNumber: " + numberOfPices.ToString();
         }
-        piceToAdd.SetUpPice(camera, plantHeadScript, OnPiceDestroyedCallback);
-
+        Vector3 direction = position - oldPosition;
+        piceToAdd.SetUpPice(camera, plantHeadScript, OnPiceDestroyedCallback, direction, oldDirection);
+        oldDirection = direction;
         piceToAdd.transform.position = oldPosition;
         activePlantPices.Add(piceToAdd);
     }
