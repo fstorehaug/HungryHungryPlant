@@ -17,7 +17,7 @@ public class CameraControllScript : MonoBehaviour
         } 
     }
 
-    private float cameraMoveRate = .15f;
+    private float cameraMoveRate = .2f;
 
     private float deathDistance { get { return camera.orthographicSize; } }
 
@@ -30,8 +30,13 @@ public class CameraControllScript : MonoBehaviour
 
     public void OnPlantHeadMoved(Vector3 position, Vector3 oldPosition)
     {
-        if (position.y < transform.position.y - deathDistance || position.y > transform.position.y + deathDistance)
+        if (IsOutOfBounds(position))
             Destroy(plantHead.gameObject);
+    }
+
+    public bool IsOutOfBounds(Vector3 position)
+    {
+        return position.y < transform.position.y - deathDistance || position.y > transform.position.y + deathDistance;
     }
 
     private void Update()
