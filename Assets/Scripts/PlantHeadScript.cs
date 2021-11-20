@@ -17,6 +17,8 @@ public class PlantHeadScript : MonoBehaviour
 
     public UnityAction<Vector3, Vector3> OnPositionChanged;
 
+    public int nutrition = 60;
+
     private void Start()
     {
         inputActions = new PlayerControlls();
@@ -66,5 +68,18 @@ public class PlantHeadScript : MonoBehaviour
         lastDirection = inputVector;
 
         OnPositionChanged?.Invoke(transform.position, transform.position - lastDirection);
+        nutrition -= 1;
+
+        if (nutrition <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
+
+    public void EatEdible(EdibleScript edible)
+    {
+        nutrition += edible.nutrition;
+        Destroy(edible.gameObject);
+    }
+
 }

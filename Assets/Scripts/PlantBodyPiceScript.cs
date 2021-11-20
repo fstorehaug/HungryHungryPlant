@@ -17,10 +17,12 @@ public class PlantBodyPiceScript : MonoBehaviour
     public void SetUpPice(CameraControllScript camera, PlantHeadScript headScript, OnOutOfBoundsDelegate callback, Vector3 direction, Vector3 oldDirection)
     {
         spriteSelector.selectSPrite(direction, oldDirection);
+        spriteSelector.SetColor(headScript.nutrition);
         this.camera = camera;
         this.headScript = headScript; 
         onOutOfBounds += callback;
         headScript.OnPositionChanged += OnPlayerHeadChanged;
+        
     }
 
     public void OnPlayerHeadChanged(Vector3 p, Vector3 op)
