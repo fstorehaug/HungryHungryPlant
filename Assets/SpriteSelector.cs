@@ -14,22 +14,30 @@ public class SpriteSelector : MonoBehaviour
 
     public void selectSPrite(Vector3 direction, Vector3 oldDirection)
     {
-        transform.up = direction;
+       
         if (direction == oldDirection)
         {
+            transform.up = direction;
             toAssign.sprite = getRandomSprite(stratightSprites);
         }
         else
         {
+            if (oldDirection == Vector3.down)
+                direction = -direction;
+
             Vector3 corss = Vector3.Cross(direction, oldDirection);
             toAssign.sprite = getRandomSprite(bendySprites);
-            if (corss.y > 0)
+            
+            if (corss.z > 0)
             {
+                
                 transform.localScale = Vector3.one;
+                transform.up = oldDirection;
             }
             else
-            {
+            {   
                 transform.localScale = new Vector3(-1, 1, 1);
+                transform.up = oldDirection;
             }
         }
     }
