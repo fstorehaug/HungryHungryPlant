@@ -16,6 +16,8 @@ public class PlantHeadScript : MonoBehaviour
     Vector3 inputVector = new Vector3(0f, 1f, 0f);
 
     public UnityAction<Vector3, Vector3> OnPositionChanged;
+    public UnityAction OnEat;
+    public UnityAction OnHeadDeath;
 
     public int nutrition = 60;
 
@@ -76,8 +78,14 @@ public class PlantHeadScript : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        OnHeadDeath?.Invoke();
+    }
+
     public void EatEdible(EdibleScript edible)
     {
+        OnEat?.Invoke();
         nutrition += edible.nutrition;
         Destroy(edible.gameObject);
     }

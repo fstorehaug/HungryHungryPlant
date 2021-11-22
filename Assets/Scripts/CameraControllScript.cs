@@ -17,6 +17,7 @@ public class CameraControllScript : MonoBehaviour
         } 
     }
 
+    [SerializeField]
     private float cameraMoveRate = .2f;
 
     private float deathDistance { get { return camera.orthographicSize + 0.5f; } }

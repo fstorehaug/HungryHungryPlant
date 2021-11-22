@@ -10,11 +10,14 @@ public class PlantBodyScript : MonoBehaviour
     private PlantBodyPiceScript plantBodyPicePrefab;
     [SerializeField]
     private CameraControllScript camera;
+    [SerializeField]
+    private SwalowKnobScript swalowKnopPrefab;
 
     Stack<PlantBodyPiceScript> plantBodyPicePool = new Stack<PlantBodyPiceScript>();
     List<PlantBodyPiceScript> activePlantPices = new List<PlantBodyPiceScript>();
 
     PlantBodyPiceScript piceToAdd;
+    PlantBodyPiceScript previousPiceToAdd;
     int numberOfPices = 0;
 
     private Vector3 oldDirection = Vector3.up;
@@ -22,6 +25,7 @@ public class PlantBodyScript : MonoBehaviour
     private void Start()
     {
         plantHeadScript.OnPositionChanged += OnHeadPositionChanged;
+        plantHeadScript.OnHeadDeath += OnHeadDead;
     }
 
     private void OnHeadPositionChanged(Vector3 position, Vector3 oldPosition)
@@ -43,10 +47,11 @@ public class PlantBodyScript : MonoBehaviour
             piceToAdd.gameObject.name = "PiceNumber: " + numberOfPices.ToString();
         }
         Vector3 direction = position - oldPosition;
-        piceToAdd.SetUpPice(camera, plantHeadScript, OnPiceDestroyedCallback, direction, oldDirection);
+        piceToAdd.SetUpPice(camera, plantHeadScript, OnPiceDestroyedCallback, direction, oldDirection, previousPiceToAdd);
         oldDirection = direction;
         piceToAdd.transform.position = oldPosition;
         activePlantPices.Add(piceToAdd);
+        previousPiceToAdd = piceToAdd;
     }
 
     public void OnPiceDestroyedCallback(PlantBodyPiceScript destroyedPice)
@@ -54,6 +59,17 @@ public class PlantBodyScript : MonoBehaviour
         activePlantPices.Remove(destroyedPice);
         plantBodyPicePool.Push(destroyedPice);
         destroyedPice.gameObject.SetActive(false);
+    }
+
+    public void OnHeadDead()
+    {
+        previousPiceToAdd.StartDestructionCascade();
+    }
+
+    public void OnHeadEat()
+    {
+        SwalowKnobScript swalow = Instantiate(swalowKnopPrefab); //TODO pool this
+        swalow.SetTarget(activePlantPices[activePlantPices.Count], camera, plantHeadScript);
     }
 
     private bool IsGameOver()
