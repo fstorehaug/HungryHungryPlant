@@ -16,6 +16,8 @@ public class PlantBodyPiceScript : MonoBehaviour
     public PlantBodyPiceScript nextPice;
     public PlantBodyPiceScript previousPice;
 
+    Coroutine coroutine;
+
 
     public void SetUpPice(CameraControllScript camera, PlantHeadScript headScript, OnOutOfBoundsDelegate callback, Vector3 direction, Vector3 oldDirection, PlantBodyPiceScript previousPice)
     {
@@ -25,7 +27,11 @@ public class PlantBodyPiceScript : MonoBehaviour
         this.headScript = headScript; 
         onOutOfBounds += callback;
         headScript.OnPositionChanged += OnPlayerHeadChanged;
+        if (previousPice == null)
+            return;
+
         this.previousPice = previousPice;
+        previousPice.nextPice = this;
     }
 
     public void OnPlayerHeadChanged(Vector3 p, Vector3 op)
@@ -42,7 +48,7 @@ public class PlantBodyPiceScript : MonoBehaviour
 
     public void StartDestructionCascade()
     {
-        StartCoroutine(DestructionEnum());
+        coroutine = StartCoroutine(DestructionEnum());
     }
 
     private IEnumerator DestructionEnum()
@@ -66,6 +72,12 @@ public class PlantBodyPiceScript : MonoBehaviour
 
         if (previousPice != null)
             previousPice.nextPice = null;
+    }
+
+    private void OnDestroy()
+    {
+        if (coroutine != null)
+            StopCoroutine(coroutine);
     }
 
 }

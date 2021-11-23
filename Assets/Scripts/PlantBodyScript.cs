@@ -26,6 +26,7 @@ public class PlantBodyScript : MonoBehaviour
     {
         plantHeadScript.OnPositionChanged += OnHeadPositionChanged;
         plantHeadScript.OnHeadDeath += OnHeadDead;
+        plantHeadScript.OnEat += OnHeadEat;
     }
 
     private void OnHeadPositionChanged(Vector3 position, Vector3 oldPosition)
@@ -69,7 +70,7 @@ public class PlantBodyScript : MonoBehaviour
     public void OnHeadEat()
     {
         SwalowKnobScript swalow = Instantiate(swalowKnopPrefab); //TODO pool this
-        swalow.SetTarget(activePlantPices[activePlantPices.Count], camera, plantHeadScript);
+        swalow.SetTarget(activePlantPices[activePlantPices.Count - 1], camera, plantHeadScript);
     }
 
     private bool IsGameOver()
