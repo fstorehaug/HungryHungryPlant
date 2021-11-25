@@ -26,7 +26,14 @@ public class CameraControllScript : MonoBehaviour
     private void Start()
     {
         plantHead.OnPositionChanged += OnPlantHeadMoved;
+        plantHead.OnHeadDeath += OnHeadDead;
         
+    }
+
+    public void OnHeadDead()
+    {
+        plantHead.OnHeadDeath -= OnHeadDead;
+        cameraMoveRate = 0f;
     }
 
     public void OnPlantHeadMoved(Vector3 position, Vector3 oldPosition)
@@ -43,6 +50,11 @@ public class CameraControllScript : MonoBehaviour
     private void Update()
     {
         transform.position += new Vector3(0f, cameraMoveDistance, 0f) * Time.deltaTime;
+    }
+
+    private void OnDestroy()
+    {
+        plantHead.OnHeadDeath -= OnHeadDead;
     }
 
 }

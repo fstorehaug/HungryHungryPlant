@@ -128,6 +128,33 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "MainMenu",
+            "id": "834b8302-367c-4d41-91e5-612b4fa09f38",
+            "actions": [
+                {
+                    "name": "MenuInteraction",
+                    "type": "Button",
+                    "id": "affea398-8592-4091-80ea-d7a003b1491b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "9438fa7c-dd77-4bda-9656-6a444eaa44bd",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MenuInteraction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

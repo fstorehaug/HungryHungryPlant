@@ -64,7 +64,9 @@ public class PlantBodyScript : MonoBehaviour
 
     public void OnHeadDead()
     {
-        previousPiceToAdd.StartDestructionCascade();
+        plantHeadScript.OnHeadDeath -= OnHeadDead;
+        if (previousPiceToAdd != null)
+            previousPiceToAdd.StartDestructionCascade();
     }
 
     public void OnHeadEat()
@@ -82,5 +84,8 @@ public class PlantBodyScript : MonoBehaviour
         }
         return false;
     }
-
+    private void OnDestroy()
+    {
+        plantHeadScript.OnHeadDeath -= OnHeadDead;
+    }
 }

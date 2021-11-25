@@ -15,7 +15,7 @@ public class SwalowKnobScript : MonoBehaviour
     public void SetTarget(PlantBodyPiceScript target, CameraControllScript camera, PlantHeadScript plantHead)
     {
         transform.position = plantHead.transform.position;
-        this.target = target.nextPice;
+        this.target = target;
         this.plantHead = plantHead;
         this.cameraControll = camera;
         plantHead.OnPositionChanged += OnPlantMove;

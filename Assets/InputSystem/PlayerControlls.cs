@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/PlayerControlls.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/InputSystem/PlayerControlls.inputactions'
 
 using System;
 using System.Collections;
@@ -141,6 +141,33 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""MainMenu"",
+            ""id"": ""834b8302-367c-4d41-91e5-612b4fa09f38"",
+            ""actions"": [
+                {
+                    ""name"": ""MenuInteraction"",
+                    ""type"": ""Button"",
+                    ""id"": ""affea398-8592-4091-80ea-d7a003b1491b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""9438fa7c-dd77-4bda-9656-6a444eaa44bd"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MenuInteraction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -151,6 +178,9 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
         m_PlayerHead_RightAction = m_PlayerHead.FindAction("RightAction", throwIfNotFound: true);
         m_PlayerHead_DownAction = m_PlayerHead.FindAction("DownAction", throwIfNotFound: true);
         m_PlayerHead_UpAction = m_PlayerHead.FindAction("UpAction", throwIfNotFound: true);
+        // MainMenu
+        m_MainMenu = asset.FindActionMap("MainMenu", throwIfNotFound: true);
+        m_MainMenu_MenuInteraction = m_MainMenu.FindAction("MenuInteraction", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -253,11 +283,48 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
         }
     }
     public PlayerHeadActions @PlayerHead => new PlayerHeadActions(this);
+
+    // MainMenu
+    private readonly InputActionMap m_MainMenu;
+    private IMainMenuActions m_MainMenuActionsCallbackInterface;
+    private readonly InputAction m_MainMenu_MenuInteraction;
+    public struct MainMenuActions
+    {
+        private @PlayerControlls m_Wrapper;
+        public MainMenuActions(@PlayerControlls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MenuInteraction => m_Wrapper.m_MainMenu_MenuInteraction;
+        public InputActionMap Get() { return m_Wrapper.m_MainMenu; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MainMenuActions set) { return set.Get(); }
+        public void SetCallbacks(IMainMenuActions instance)
+        {
+            if (m_Wrapper.m_MainMenuActionsCallbackInterface != null)
+            {
+                @MenuInteraction.started -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnMenuInteraction;
+                @MenuInteraction.performed -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnMenuInteraction;
+                @MenuInteraction.canceled -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnMenuInteraction;
+            }
+            m_Wrapper.m_MainMenuActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @MenuInteraction.started += instance.OnMenuInteraction;
+                @MenuInteraction.performed += instance.OnMenuInteraction;
+                @MenuInteraction.canceled += instance.OnMenuInteraction;
+            }
+        }
+    }
+    public MainMenuActions @MainMenu => new MainMenuActions(this);
     public interface IPlayerHeadActions
     {
         void OnLeftAction(InputAction.CallbackContext context);
         void OnRightAction(InputAction.CallbackContext context);
         void OnDownAction(InputAction.CallbackContext context);
         void OnUpAction(InputAction.CallbackContext context);
+    }
+    public interface IMainMenuActions
+    {
+        void OnMenuInteraction(InputAction.CallbackContext context);
     }
 }
