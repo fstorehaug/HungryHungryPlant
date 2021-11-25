@@ -123,6 +123,30 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &458958181 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8683481025948728480, guid: 42250c47e426c2f4081cbc38c4794503, type: 3}
+  m_PrefabInstance: {fileID: 5150620193357114005}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &458958183
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 458958181}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: aefbb00307ab0014093ff8e975862b31, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &665757766
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -511,7 +535,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1398605028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1515376707}
@@ -1197,6 +1221,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 304145375333279044, guid: 42250c47e426c2f4081cbc38c4794503, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 5150620193520869619, guid: 42250c47e426c2f4081cbc38c4794503, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1244,6 +1272,30 @@ PrefabInstance:
     - target: {fileID: 5150620193520869623, guid: 42250c47e426c2f4081cbc38c4794503, type: 3}
       propertyPath: m_Name
       value: PlantHead
+      objectReference: {fileID: 0}
+    - target: {fileID: 7516665957755359737, guid: 42250c47e426c2f4081cbc38c4794503, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 458958183}
+    - target: {fileID: 8644836133518275402, guid: 42250c47e426c2f4081cbc38c4794503, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5d865609df72dc34d98bec7163a0c7ef, type: 3}
+    - target: {fileID: 8644836133518275402, guid: 42250c47e426c2f4081cbc38c4794503, type: 3}
+      propertyPath: m_Color.b
+      value: 0.19298798
+      objectReference: {fileID: 0}
+    - target: {fileID: 8644836133518275402, guid: 42250c47e426c2f4081cbc38c4794503, type: 3}
+      propertyPath: m_Color.g
+      value: 0.6320754
+      objectReference: {fileID: 0}
+    - target: {fileID: 8644836133518275402, guid: 42250c47e426c2f4081cbc38c4794503, type: 3}
+      propertyPath: m_Color.r
+      value: 0.18187074
+      objectReference: {fileID: 0}
+    - target: {fileID: 8683481025948728480, guid: 42250c47e426c2f4081cbc38c4794503, type: 3}
+      propertyPath: m_Name
+      value: PlantSprite
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42250c47e426c2f4081cbc38c4794503, type: 3}

@@ -11,6 +11,9 @@ public class PlantHeadScript : MonoBehaviour
     private float stepTime = .4f;
     private float timeSinceStep = 0f;
 
+    [SerializeField]
+    private Animator animator;
+
     public float movespeed = 1f;
     Vector3 lastDirection = Vector3.zero;
     Vector3 inputVector = new Vector3(0f, 1f, 0f);
@@ -29,6 +32,8 @@ public class PlantHeadScript : MonoBehaviour
         inputActions.PlayerHead.DownAction.started += DownAction_started;
         inputActions.PlayerHead.RightAction.started += RightAction_started;
         inputActions.PlayerHead.LeftAction.started += LeftAction_started;
+
+        animator.speed = animator.speed / stepTime;
     }
 
     private void LeftAction_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -67,6 +72,7 @@ public class PlantHeadScript : MonoBehaviour
         }
 
         transform.position += inputVector;
+        transform.up = inputVector;
         lastDirection = inputVector;
 
         OnPositionChanged?.Invoke(transform.position, transform.position - lastDirection);
